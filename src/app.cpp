@@ -65,6 +65,18 @@ void App::onSSO() {
 	cardRequest.setTarget("com.foursquare.sso.card");
 	cardRequest.setAction("bb.action.VIEW");
 	cardRequest.setMimeType("sso/foursquare");
+
+	/*Pass in your CLIENT_ID from your Foursquare API consumer. This card will call back to your childCardDone slot with the
+	 * appropriate response for the actions the user took.
+	 *
+	 * If the user authorizes your app or has already authorized you:
+	 * The response reason will be "success" and the data block will have a json encoded access token which you can use
+	 * for authenticated Foursquare requests. That response string looks something like this:
+	 * { access_token: "masdfvasvawefafawvwef90we0900990092012" }
+	 *
+	 * If the user denies the authentication: the response reason will be "denied".
+	 * If the user cancels the login without any action: the reason message will be "canceled"
+	 */
 	cardRequest.setData(QString("KZVMPWA403INWP4FSVVUO4DORGUZR5VEJLZZH3BSUGNC33Q4").toUtf8());
 
 	invokeManager->invoke(cardRequest);
