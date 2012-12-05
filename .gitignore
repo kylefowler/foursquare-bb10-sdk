@@ -1,0 +1,28 @@
+# Compiled Object files
+*.slo
+*.lo
+*.o
+*.qm
+
+# Compiled Dynamic libraries
+*.so
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+
+# Project Files
+.project
+.cproject
+
+*.bar
+arm/
+x86/
+.settings/
+assets/.preview*
+*.preview*
+.DS_Store
+Thumbs.db
+
+Rakefile~
