@@ -33,7 +33,7 @@ void App::childCardDone(const bb::system::CardDoneMessage &doneMessage) {
 
 void App::onShowHelloCard() {
 	InvokeRequest cardRequest;
-	cardRequest.setTarget("com.foursquare.uri");
+	cardRequest.setTarget("com.foursquare.blackberry.uri");
 	cardRequest.setAction("bb.action.OPEN");
 	cardRequest.setUri("foursquare://venues/search");
 
@@ -42,7 +42,7 @@ void App::onShowHelloCard() {
 
 void App::onShowProfile() {
 	InvokeRequest cardRequest;
-	cardRequest.setTarget("com.foursquare.uri");
+	cardRequest.setTarget("com.foursquare.blackberry.uri");
 	cardRequest.setAction("bb.action.OPEN");
 	cardRequest.setUri("foursquare://users/self/update");
 
@@ -51,7 +51,7 @@ void App::onShowProfile() {
 
 void App::onFriendRequests() {
 	InvokeRequest cardRequest;
-	cardRequest.setTarget("com.foursquare.uri");
+	cardRequest.setTarget("com.foursquare.blackberry.uri");
 	cardRequest.setAction("bb.action.OPEN");
 	cardRequest.setUri("foursquare://users/requests");
 
@@ -60,7 +60,7 @@ void App::onFriendRequests() {
 
 void App::onSSO() {
 	InvokeRequest cardRequest;
-	cardRequest.setTarget("com.foursquare.sso.card");
+	cardRequest.setTarget("com.foursquare.blackberry.sso.card");
 	cardRequest.setAction("bb.action.VIEW");
 	cardRequest.setMimeType("sso/foursquare");
 
@@ -83,7 +83,7 @@ void App::onSSO() {
 
 void App::onPageSuggestions() {
 	InvokeRequest cardRequest;
-	cardRequest.setTarget("com.foursquare.uri");
+	cardRequest.setTarget("com.foursquare.blackberry.uri");
 	cardRequest.setAction("bb.action.OPEN");
 	cardRequest.setUri("foursquare://users/suggest?type=page");
 
@@ -93,7 +93,7 @@ void App::onPageSuggestions() {
 
 void App::onFriendSuggestions() {
 	InvokeRequest cardRequest;
-	cardRequest.setTarget("com.foursquare.uri");
+	cardRequest.setTarget("com.foursquare.blackberry.uri");
 	cardRequest.setAction("bb.action.OPEN");
 	cardRequest.setUri("foursquare://users/suggest?type=friend");
 
@@ -103,7 +103,7 @@ void App::onFriendSuggestions() {
 
 void App::onCheckinReminder() {
 	InvokeRequest cardRequest;
-	cardRequest.setTarget("com.foursquare.uri");
+	cardRequest.setTarget("com.foursquare.blackberry.uri");
 	cardRequest.setAction("bb.action.OPEN");
 	cardRequest.setUri("foursquare://venues/explore");
 
@@ -113,7 +113,7 @@ void App::onCheckinReminder() {
 
 void App::onAddFriends() {
 	InvokeRequest cardRequest;
-	cardRequest.setTarget("com.foursquare.uri");
+	cardRequest.setTarget("com.foursquare.blackberry.uri");
 	cardRequest.setAction("bb.action.OPEN");
 	cardRequest.setUri("foursquare://users/addfriends?from=phonebook");
 
@@ -122,7 +122,7 @@ void App::onAddFriends() {
 
 void App::onOpenVenue() {
 	InvokeRequest cardRequest;
-	cardRequest.setTarget("com.foursquare.uri");
+	cardRequest.setTarget("com.foursquare.blackberry.uri");
 	cardRequest.setAction("bb.action.OPEN");
 	cardRequest.setUri("foursquare://venues/4ef0e7cf7beb5932d5bdeb4e");
 
@@ -131,7 +131,7 @@ void App::onOpenVenue() {
 
 void App::onOpenCheckin() {
 	InvokeRequest cardRequest;
-	cardRequest.setTarget("com.foursquare.uri");
+	cardRequest.setTarget("com.foursquare.blackberry.uri");
 	cardRequest.setAction("bb.action.OPEN");
 	cardRequest.setUri("foursquare://checkins/50a08609e4b04c46ea54446d");
 
