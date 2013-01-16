@@ -11,8 +11,11 @@
 #include <bb/system/CardDoneMessage>
 #include <bb/PpsObject>
 #include <bb/cascades/Page>
+#include <bb/data/JsonDataAccess>
+#include <bb/system/SystemToast>
 using namespace bb::cascades;
 using namespace bb::system;
+using namespace bb::data;
 
 App::App() {
 	QmlDocument *qml = QmlDocument::create("asset:///main.qml");
@@ -29,9 +32,22 @@ App::App() {
 void App::childCardDone(const bb::system::CardDoneMessage &doneMessage) {
 	qDebug() << "reason" << doneMessage.reason();
 	qDebug() << "data: " << doneMessage.data();
+
+	SystemToast* t = new SystemToast(this);
+	if(doneMessage.dataType().compare("application/json") == 0) {
+		//the data type from the venue search card is application/json
+		//so we need to convert the json data to a map here. This will match
+		//the json format from the foursquare docs at http://developer.foursquare.com
+		JsonDataAccess jda;
+		const QVariantMap venueMap = jda.loadFromBuffer(doneMessage.data()).toMap();
+		t->setBody(QString("User Picked: ") + venueMap.value("name","").toString());
+	} else {
+		t->setBody(doneMessage.data());
+	}
+	t->show();
 }
 
-void App::onShowHelloCard() {
+void App::onVenueSearch() {
 	InvokeRequest cardRequest;
 	cardRequest.setTarget("com.foursquare.blackberry.uri");
 	cardRequest.setAction("bb.action.OPEN");
@@ -80,6 +96,18 @@ void App::onSSO() {
 	invokeManager->invoke(cardRequest);
 }
 
+void App::onVenueSearchCard() {
+	InvokeRequest cardRequest;
+	cardRequest.setTarget("com.foursquare.blackberry.venuesearch.card");
+	cardRequest.setAction("bb.action.VIEW");
+	cardRequest.setMimeType("venuesearch/foursquare");
+
+	/* If you want to prime the search with a query, pass a query string into the data param
+	 */
+	cardRequest.setData(QString("best buy").toUtf8());
+
+	invokeManager->invoke(cardRequest);
+}
 
 void App::onPageSuggestions() {
 	InvokeRequest cardRequest;

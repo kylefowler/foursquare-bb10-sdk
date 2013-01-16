@@ -3,6 +3,7 @@ TARGET = CardInvoker
 
 CONFIG += qt warn_on debug_and_release cascades
 LIBS += -lbbsystem
+LIBS += -lbbdata
 INCLUDEPATH += ../src
 SOURCES += ../src/*.cpp
 HEADERS += ../src/*.hpp ../src/*.h

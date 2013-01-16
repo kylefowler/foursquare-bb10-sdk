@@ -17,10 +17,17 @@ Page {
                 }
             }
             Button {
-                id: showCardButton
-                text: "Venue Search"
+                id: showVenueSearchCardButton
+                text: "Venue Search (card)"
                 onCreationCompleted: {
-                    showCardButton.clicked.connect(app.onShowHelloCard);
+                    showVenueSearchCardButton.clicked.connect(app.onVenueSearchCard);
+                }
+            }
+            Button {
+                id: showCardButton
+                text: "Venue Search (launch app)"
+                onCreationCompleted: {
+                    showCardButton.clicked.connect(app.onVenueSearch);
                 }
             }
             Button {

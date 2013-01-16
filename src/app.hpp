@@ -12,7 +12,7 @@ Q_OBJECT
 public:
 	App();
 public slots:
-	void onShowHelloCard();
+	void onVenueSearch();
 	void onShowProfile();
 	void onFriendRequests();
 	void onPageSuggestions();
@@ -21,6 +21,7 @@ public slots:
 	void onAddFriends();
 	void onOpenVenue();
 	void onOpenCheckin();
+	void onVenueSearchCard();
 	void onSSO();
 	void childCardDone(const bb::system::CardDoneMessage &doneMessage);
 private:
