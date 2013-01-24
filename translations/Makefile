@@ -1,4 +1,4 @@
-QMAKE_TARGET  = CardInvoker
+QMAKE_TARGET  = foursquare_bb10_sdk
 LUPDATE       = $(QNX_HOST)/usr/bin/lupdate
 LRELEASE      = $(QNX_HOST)/usr/bin/lrelease
 

@@ -4,13 +4,14 @@
 
 #include <QObject>
 #include <bb/system/InvokeManager>
+#include <bb/cascades/Application>
 /*!
  * @brief Application GUI object
  */
 class App: public QObject {
 Q_OBJECT
 public:
-	App();
+	App(bb::cascades::Application* app);
 public slots:
 	void onVenueSearch();
 	void onShowProfile();

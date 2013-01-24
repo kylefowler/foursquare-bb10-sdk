@@ -17,8 +17,8 @@ using namespace bb::cascades;
 using namespace bb::system;
 using namespace bb::data;
 
-App::App() {
-	QmlDocument *qml = QmlDocument::create("asset:///main.qml");
+App::App(bb::cascades::Application* app) {
+	QmlDocument *qml = QmlDocument::create("asset:///main.qml").parent(this);
 	qml->setContextProperty("app", this);
 
 	Page *root = qml->createRootObject<Page>();
