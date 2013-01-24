@@ -74,37 +74,68 @@ void App::onFriendRequests() {
 	invokeManager->invoke(cardRequest);
 }
 
+/*
+ * Foursquare SSO - Login/Connect with Foursquare
+ *
+ * Pass in your CLIENT_ID from your Foursquare API consumer. This card will call back to your childCardDone slot with the
+ * appropriate response for the actions the user took.
+ *
+ * If the user authorizes your app or has already authorized you:
+ * The response reason will be "success" and the data block will have a json encoded access token which you can use
+ * for authenticated Foursquare requests. That response string looks something like this:
+ * { access_token: "masdfvasvawefafawvwef90we0900990092012" }
+ *
+ * If the user denies the authentication: the response reason will be "denied".
+ * If the user cancels the login without any action: the reason message will be "canceled"
+ *
+ */
 void App::onSSO() {
 	InvokeRequest cardRequest;
 	cardRequest.setTarget("com.foursquare.blackberry.sso.card");
 	cardRequest.setAction("bb.action.VIEW");
 	cardRequest.setMimeType("sso/foursquare");
 
-	/*Pass in your CLIENT_ID from your Foursquare API consumer. This card will call back to your childCardDone slot with the
-	 * appropriate response for the actions the user took.
-	 *
-	 * If the user authorizes your app or has already authorized you:
-	 * The response reason will be "success" and the data block will have a json encoded access token which you can use
-	 * for authenticated Foursquare requests. That response string looks something like this:
-	 * { access_token: "masdfvasvawefafawvwef90we0900990092012" }
-	 *
-	 * If the user denies the authentication: the response reason will be "denied".
-	 * If the user cancels the login without any action: the reason message will be "canceled"
-	 */
 	cardRequest.setData(QString("KZVMPWA403INWP4FSVVUO4DORGUZR5VEJLZZH3BSUGNC33Q4").toUtf8());
 
 	invokeManager->invoke(cardRequest);
 }
 
+/*
+ * Foursquare Venue Picker - Search nearby places right from within your app.
+ *
+ * Launch native Foursquare venue search in your app. Let the user pick a venue nearby and get the data corresponding to the venue back in your app.
+ * Tag your content with a location for a richer experience!
+ *
+ * This card will call back to your childCardDone slot with the appropriate response for the actions the user took.
+ *
+ * URI Params:
+ * query: (optional) prime the venue search with a query
+ * client_id: (required) the client id from your oauth consumer
+ * client_secret: (required) the client secret from your oauth consumer
+ * oauth_token: (required if no client_id/client_secret) pass this if you already have an authenticated user token, this way venue search results will be fitted to the user
+ *              requesting them for a higher quality queryless search
+ *
+ * Response:
+ * When the user selects a venue, you will get the venue information in JSON format back through the childCardDone slot in the data object. The venue format will match what is listed here
+ * https://developer.foursquare.com/docs/responses/venue in the core venue fields
+ *
+ * If the user cancels the search without any action: the reason message will be "canceled"
+ * If any of the parameters are missing you will get a reason message of "invalid_credentials"
+ */
 void App::onVenueSearchCard() {
 	InvokeRequest cardRequest;
 	cardRequest.setTarget("com.foursquare.blackberry.venuesearch.card");
 	cardRequest.setAction("bb.action.VIEW");
 	cardRequest.setMimeType("venuesearch/foursquare");
 
-	/* If you want to prime the search with a query, pass a query string into the data param
+	/*
+	 * Construct the url to pass to foursquare
 	 */
-	cardRequest.setData(QString("best buy").toUtf8());
+	QUrl uri = QUrl("foursquare://venues/search");
+	uri.addQueryItem("client_id", "KZVMPWA403INWP4FSVVUO4DORGUZR5VEJLZZH3BSUGNC33Q4");
+	uri.addQueryItem("client_secret", "KEF2BCCOYZUBWXJAELF4EYAIOHGJOSX4GD2GC3QTLV2B4QAH");
+	uri.addQueryItem("query", "best buy");
+	cardRequest.setUri(uri);
 
 	invokeManager->invoke(cardRequest);
 }
